@@ -89,7 +89,8 @@ public final class DatabaseHandler {
             conn = DriverManager.getConnection(DB_URL);
         }
         catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Cant load database", "Database Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Cant load database");
+            //JOptionPane.showMessageDialog(null, "Cant load database", "Database Error", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
     }
@@ -130,7 +131,7 @@ public final class DatabaseHandler {
             return true;
         }
         catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error:" + ex.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Error:" + ex.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
             System.out.println("Exception at execQuery:dataHandler" + ex.getLocalizedMessage());
             return false;
         }

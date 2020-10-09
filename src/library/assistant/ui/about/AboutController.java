@@ -6,14 +6,18 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.jpro.webapi.WebAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import library.assistant.WindowManager;
 import library.assistant.alert.AlertMaker;
 import library.assistant.util.LibraryAssistantUtil;
 
@@ -24,14 +28,26 @@ public class AboutController implements Initializable {
     private static final String WEBSITE = "http://www.genuinecoder.com";
     private static final String YOUTUBE = "https://www.youtube.com/c/GenuineCoder";
 
+    @FXML
+    AnchorPane anchorPane;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AlertMaker.showTrayMessage(String.format("Hello %s!", System.getProperty("user.name")), "Thanks for trying out Library Assistant");
+        if(!WebAPI.isBrowser()) {
+            AlertMaker.showTrayMessage(String.format("Hello %s!", System.getProperty("user.name")), "Thanks for trying out Library Assistant");
+        }
+        anchorPane.setOnMouseClicked((e) -> {
+            closeStage();
+        });
     }
 
     private void loadWebpage(String url) {
         try {
-            Desktop.getDesktop().browse(new URI(url));
+            if(!WebAPI.isBrowser()) {
+                Desktop.getDesktop().browse(new URI(url));
+            } else {
+                WebAPI.getWebAPI(anchorPane.getScene()).openURLAsTab(url);
+            }
         } catch (IOException | URISyntaxException e1) {
             e1.printStackTrace();
             handleWebpageLoadException(url);
@@ -68,5 +84,9 @@ public class AboutController implements Initializable {
     @FXML
     private void loadFacebook(ActionEvent event) {
         loadWebpage(FACEBOOK);
+    }
+    @FXML
+    private void closeStage() {
+        WindowManager.closePopup(anchorPane);
     }
 }

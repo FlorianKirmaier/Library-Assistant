@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.jpro.webapi.WebAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import library.assistant.WindowManager;
 import library.assistant.alert.AlertMaker;
 import library.assistant.data.model.Book;
 import library.assistant.database.DataHelper;
@@ -84,7 +87,11 @@ public class BookAddController implements Initializable {
     @FXML
     private void cancel(ActionEvent event) {
         Stage stage = (Stage) rootPane.getScene().getWindow();
-        stage.close();
+        if(!WebAPI.isBrowser()) {
+            stage.close();
+        } else {
+            WindowManager.closePopup(rootPane);
+        }
     }
 
     private void checkData() {

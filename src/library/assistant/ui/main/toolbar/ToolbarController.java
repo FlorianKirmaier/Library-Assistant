@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import library.assistant.ui.callback.BookReturnCallback;
 import library.assistant.ui.issuedlist.IssuedListController;
 import library.assistant.util.LibraryAssistantUtil;
@@ -12,6 +14,9 @@ import library.assistant.util.LibraryAssistantUtil;
 public class ToolbarController implements Initializable {
 
     private BookReturnCallback callback;
+
+    @FXML
+    Parent rootPane;
 
     public void setBookReturnCallback(BookReturnCallback callback) {
         this.callback = callback;
@@ -24,32 +29,32 @@ public class ToolbarController implements Initializable {
 
     @FXML
     private void loadAddMember(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addmember/member_add.fxml"), "Add New Member", null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addmember/member_add.fxml"), "Add New Member", rootPane.getScene().getWindow(), null);
     }
 
     @FXML
     private void loadAddBook(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addbook/add_book.fxml"), "Add New Book", null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addbook/add_book.fxml"), "Add New Book", rootPane.getScene().getWindow(), null);
     }
 
     @FXML
     private void loadMemberTable(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listmember/member_list.fxml"), "Member List", null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listmember/member_list.fxml"), "Member List", rootPane.getScene().getWindow(), null);
     }
 
     @FXML
     private void loadBookTable(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listbook/book_list.fxml"), "Book List", null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listbook/book_list.fxml"), "Book List", rootPane.getScene().getWindow(), null);
     }
 
     @FXML
     private void loadSettings(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/settings/settings.fxml"), "Settings", null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/settings/settings.fxml"), "Settings", rootPane.getScene().getWindow(), null);
     }
 
     @FXML
     private void loadIssuedBookList(ActionEvent event) {
-        Object controller = LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/issuedlist/issued_list.fxml"), "Issued Book List", null);
+        Object controller = LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/issuedlist/issued_list.fxml"), "Issued Book List", rootPane.getScene().getWindow(), null);
         if (controller != null) {
             IssuedListController cont = (IssuedListController) controller;
             cont.setBookReturnCallback(callback);

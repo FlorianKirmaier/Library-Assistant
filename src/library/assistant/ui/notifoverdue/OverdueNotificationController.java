@@ -27,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import library.assistant.WindowManager;
 import library.assistant.alert.AlertMaker;
 import library.assistant.data.model.MailServerInfo;
 import library.assistant.database.DataHelper;
@@ -122,17 +123,20 @@ public class OverdueNotificationController implements Initializable {
 
     @FXML
     private void handleSendNotificationAction(ActionEvent event) {
+        JFXButton button = new JFXButton("Okay");
+        AlertMaker.showMaterialDialog(rootPane, contentPane, ImmutableList.of(button), "Mail server is not configured", "This is not available in the online demo!");
+        /*
         List<NotificationItem> selectedItems = list.stream().filter(item -> item.getNotify()).collect(Collectors.toList());
         if (selectedItems.isEmpty()) {
             AlertMaker.showErrorMessage("Nothing Selected", "Nothing selected to notify");
             return;
         }
-        Object controller = LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/notifoverdue/emailsender/email_sender.fxml"), "Notify Overdue", null);
+        Object controller = LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/notifoverdue/emailsender/email_sender.fxml"), "Notify Overdue", rootPane.getScene().getWindow(), null);
         if (controller != null) {
             EmailSenderController cont = (EmailSenderController) controller;
             cont.setNotifRequestData(selectedItems);
             cont.start();
-        }
+        }*/
     }
 
     private void checkForMailServerConfig() {
@@ -144,7 +148,7 @@ public class OverdueNotificationController implements Initializable {
         System.out.println(mailServerInfo);
         if (mailServerInfo == null || !mailServerInfo.validate()) {
             System.out.println("Mail server not configured");
-            AlertMaker.showMaterialDialog(rootPane, contentPane, ImmutableList.of(button), "Mail server is not configured", "Please configure mail server first.\nIt is available under Settings");
+            // AlertMaker.showMaterialDialog(rootPane, contentPane, ImmutableList.of(button), "Mail server is not configured", "Please configure mail server first.\nIt is available under Settings");
         }
     }
 
@@ -160,5 +164,10 @@ public class OverdueNotificationController implements Initializable {
             });
             return new SimpleObjectProperty<>(checkBox);
         }
+    }
+
+    @FXML
+    private void closeStage(ActionEvent event) {
+        WindowManager.closePopup(rootPane);
     }
 }

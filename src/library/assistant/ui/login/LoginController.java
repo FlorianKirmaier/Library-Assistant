@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
+import library.assistant.WindowManager;
 import library.assistant.ui.settings.Preferences;
 import library.assistant.util.LibraryAssistantUtil;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -34,7 +36,10 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         preference = Preferences.getPreferences();
+        username.setText("admin");
+        password.setText("admin");
     }
 
     @FXML
@@ -43,8 +48,8 @@ public class LoginController implements Initializable {
         String pword = DigestUtils.shaHex(password.getText());
 
         if (uname.equals(preference.getUsername()) && pword.equals(preference.getPassword())) {
+            loadMain(username.getScene().getWindow());
             closeStage();
-            loadMain();
             LOGGER.log(Level.INFO, "User successfully logged in {}", uname);
         }
         else {
@@ -59,17 +64,13 @@ public class LoginController implements Initializable {
     }
 
     private void closeStage() {
-        ((Stage) username.getScene().getWindow()).close();
+        WindowManager.closePopup(username);
     }
 
-    void loadMain() {
+    void loadMain(Window parentWindow) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("/library/assistant/ui/main/main.fxml"));
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Library Assistant");
-            stage.setScene(new Scene(parent));
-            stage.show();
-            LibraryAssistantUtil.setStageIcon(stage);
+            WindowManager.showWindow(parent,parentWindow, "Library Assistant", () -> {});
         }
         catch (IOException ex) {
             LOGGER.log(Level.ERROR, "{}", ex);

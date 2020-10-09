@@ -29,6 +29,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import library.assistant.WindowManager;
 import library.assistant.alert.AlertMaker;
 import library.assistant.database.DatabaseHandler;
 import library.assistant.ui.addbook.BookAddController;
@@ -142,15 +143,7 @@ public class BookListController implements Initializable {
             BookAddController controller = (BookAddController) loader.getController();
             controller.inflateUI(selectedForEdit);
 
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Edit Book");
-            stage.setScene(new Scene(parent));
-            stage.show();
-            LibraryAssistantUtil.setStageIcon(stage);
-
-            stage.setOnHiding((e) -> {
-                handleRefresh(new ActionEvent());
-            });
+            WindowManager.showWindow(parent, rootPane.getScene().getWindow(), "Edit Book", () -> handleRefresh(new ActionEvent()));
 
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -181,7 +174,7 @@ public class BookListController implements Initializable {
 
     @FXML
     private void closeStage(ActionEvent event) {
-        getStage().close();
+        WindowManager.closePopup(rootPane);
     }
 
     public static class Book {

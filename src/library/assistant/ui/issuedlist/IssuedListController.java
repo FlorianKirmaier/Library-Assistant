@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
+
+import com.jpro.webapi.WebAPI;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import library.assistant.WindowManager;
 import library.assistant.database.DatabaseHandler;
 import library.assistant.ui.settings.Preferences;
 import library.assistant.ui.callback.BookReturnCallback;
@@ -134,7 +137,7 @@ public class IssuedListController implements Initializable {
 
     @FXML
     private void closeStage(ActionEvent event) {
-        getStage().close();
+        WindowManager.closePopup(rootPane);
     }
 
     private Stage getStage() {

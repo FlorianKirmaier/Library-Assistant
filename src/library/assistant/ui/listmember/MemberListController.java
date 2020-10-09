@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.jpro.webapi.WebAPI;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +31,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import library.assistant.WindowManager;
 import library.assistant.alert.AlertMaker;
 import library.assistant.database.DatabaseHandler;
 import library.assistant.ui.addbook.BookAddController;
@@ -177,7 +180,7 @@ public class MemberListController implements Initializable {
 
     @FXML
     private void closeStage(ActionEvent event) {
-        getStage().close();
+        WindowManager.closePopup(rootPane);
     }
 
     public static class Member {

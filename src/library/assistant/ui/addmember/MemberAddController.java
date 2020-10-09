@@ -5,12 +5,15 @@ import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import com.jpro.webapi.WebAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import library.assistant.WindowManager;
 import library.assistant.alert.AlertMaker;
 import library.assistant.database.DataHelper;
 import library.assistant.database.DatabaseHandler;
@@ -49,7 +52,11 @@ public class MemberAddController implements Initializable {
     @FXML
     private void cancel(ActionEvent event) {
         Stage stage = (Stage) name.getScene().getWindow();
-        stage.close();
+        if(!WebAPI.isBrowser()) {
+            stage.close();
+        } else {
+            WindowManager.closePopup(name);
+        }
     }
 
     @FXML

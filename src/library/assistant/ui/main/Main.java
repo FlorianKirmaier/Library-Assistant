@@ -1,11 +1,14 @@
 package library.assistant.ui.main;
 
+import com.jpro.webapi.WebAPI;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import library.assistant.WindowManager;
 import library.assistant.database.DatabaseHandler;
 import library.assistant.exceptions.ExceptionUtil;
 import library.assistant.util.LibraryAssistantUtil;
@@ -21,13 +24,17 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/library/assistant/ui/login/login.fxml"));
 
-        Scene scene = new Scene(root);
+        System.setSecurityManager(null);
 
-        stage.setScene(scene);
-        stage.show();
-        stage.setTitle("Library Assistant Login");
+        if(WebAPI.isBrowser()) {
+            StackPane pane = new StackPane();
 
-        LibraryAssistantUtil.setStageIcon(stage);
+            Scene scene = new Scene(pane);
+            stage.setScene(scene);
+            stage.show();
+        }
+
+        WindowManager.showWindow(root,stage,"Library Assistant Login",() -> {});
 
         new Thread(() -> {
             ExceptionUtil.init();

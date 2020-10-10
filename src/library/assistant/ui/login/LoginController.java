@@ -68,13 +68,13 @@ public class LoginController implements Initializable {
     }
 
     void loadMain(Window parentWindow) {
-        try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/library/assistant/ui/main/main.fxml"));
-            WindowManager.showWindow(parent,parentWindow, "Library Assistant", () -> {});
+        Parent parent = WindowManager.load(getClass().getResource("/library/assistant/ui/main/main.fxml"));
+        WindowManager.showWindow(parent,username, "Library Assistant", () -> {});
+        /*try {
         }
         catch (IOException ex) {
             LOGGER.log(Level.ERROR, "{}", ex);
-        }
+        }*/
     }
 
 }

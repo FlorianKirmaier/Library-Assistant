@@ -20,26 +20,30 @@ public class Main extends Application {
 
     private final static Logger LOGGER = LogManager.getLogger(Main.class.getName());
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/library/assistant/ui/login/login.fxml"));
-
+    static {
         System.setSecurityManager(null);
-
-        if(WebAPI.isBrowser()) {
-            StackPane pane = new StackPane();
-
-            Scene scene = new Scene(pane);
-            stage.setScene(scene);
-            stage.show();
-        }
-
-        WindowManager.showWindow(root,stage,"Library Assistant Login",() -> {});
-
         new Thread(() -> {
             ExceptionUtil.init();
             DatabaseHandler.getInstance();
         }).start();
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        Parent root = WindowManager.load(getClass().getResource("/library/assistant/ui/login/login.fxml"));
+
+        if(WebAPI.isBrowser()) {
+            StackPane pane = new StackPane();
+            pane.getProperties().put(WindowManager.POPUP_CONTEXT,WindowManager.POPUP_CONTEXT);
+            Scene scene = new Scene(pane);
+            stage.setScene(scene);
+            stage.show();
+            WindowManager.showWindow(root,pane,"Library Assistant Login",() -> {});
+        } else {
+            WindowManager.showWindow(root,null,"Library Assistant Login",() -> {});
+        }
+
     }
 
     public static void main(String[] args) {

@@ -29,32 +29,32 @@ public class ToolbarController implements Initializable {
 
     @FXML
     private void loadAddMember(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addmember/member_add.fxml"), "Add New Member", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addmember/member_add.fxml"), "Add New Member", rootPane, null);
     }
 
     @FXML
     private void loadAddBook(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addbook/add_book.fxml"), "Add New Book", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addbook/add_book.fxml"), "Add New Book", rootPane, null);
     }
 
     @FXML
     private void loadMemberTable(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listmember/member_list.fxml"), "Member List", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listmember/member_list.fxml"), "Member List", rootPane, null);
     }
 
     @FXML
     private void loadBookTable(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listbook/book_list.fxml"), "Book List", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listbook/book_list.fxml"), "Book List", rootPane, null);
     }
 
     @FXML
     private void loadSettings(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/settings/settings.fxml"), "Settings", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/settings/settings.fxml"), "Settings", rootPane, null);
     }
 
     @FXML
     private void loadIssuedBookList(ActionEvent event) {
-        Object controller = LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/issuedlist/issued_list.fxml"), "Issued Book List", rootPane.getScene().getWindow(), null);
+        Object controller = LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/issuedlist/issued_list.fxml"), "Issued Book List", rootPane, null);
         if (controller != null) {
             IssuedListController cont = (IssuedListController) controller;
             cont.setBookReturnCallback(callback);

@@ -6,12 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import library.assistant.WindowManager;
 
 public class OverdueNotificationLoader extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("overdue_notification.fxml"));
+        Parent root = WindowManager.load(getClass().getResource("overdue_notification.fxml"));
 
         Scene scene = new Scene(root);
 

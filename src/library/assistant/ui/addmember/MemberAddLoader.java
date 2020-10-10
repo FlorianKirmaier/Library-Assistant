@@ -11,13 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import library.assistant.WindowManager;
 
 
 public class MemberAddLoader extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("member_add.fxml"));
+        Parent root = WindowManager.load(getClass().getResource("member_add.fxml"));
         
         Scene scene = new Scene(root);
         

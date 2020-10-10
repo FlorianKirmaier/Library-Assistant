@@ -142,6 +142,7 @@ public class MemberListController implements Initializable {
         }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/library/assistant/ui/addmember/member_add.fxml"));
+            loader.setClassLoader(getClass().getClassLoader());
             Parent parent = loader.load();
 
             MemberAddController controller = (MemberAddController) loader.getController();

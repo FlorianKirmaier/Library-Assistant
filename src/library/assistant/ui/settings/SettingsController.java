@@ -88,7 +88,7 @@ public class SettingsController implements Initializable {
     private void handleTestMailAction(ActionEvent event) {
         MailServerInfo mailServerInfo = readMailSererInfo();
         if (mailServerInfo != null) {
-            TestMailController controller = (TestMailController) LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/mail/test_mail.fxml"), "Test Email", username.getScene().getWindow(), null);
+            TestMailController controller = (TestMailController) LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/mail/test_mail.fxml"), "Test Email", username, null);
             controller.setMailServerInfo(mailServerInfo);
         }
     }

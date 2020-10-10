@@ -6,13 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import library.assistant.WindowManager;
 import library.assistant.database.DatabaseHandler;
 
 public class SettingsLoader extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/library/assistant/ui/settings/settings.fxml"));
+        Parent root = WindowManager.load(getClass().getResource("/library/assistant/ui/settings/settings.fxml"));
 
         Scene scene = new Scene(root);
 

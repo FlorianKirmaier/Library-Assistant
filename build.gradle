@@ -24,6 +24,7 @@ buildscript {
  */
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'maven-publish'
 apply plugin: 'org.openjfx.javafxplugin'
 
 compileJava {
@@ -125,4 +126,16 @@ jpro {
     //jpro server port
     port = 8080
 
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = "com.javafxensemble.libraryassistant"
+            artifactId = "libraryassistant"
+            version = "0.1"
+
+            from components.java
+        }
+    }
 }

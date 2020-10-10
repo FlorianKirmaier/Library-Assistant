@@ -7,13 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import library.assistant.WindowManager;
 
 
 public class IssuedListLoader extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("issued_list.fxml"));
+        Parent root = WindowManager.load(getClass().getResource("issued_list.fxml"));
         
         Scene scene = new Scene(root);
         

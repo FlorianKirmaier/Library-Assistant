@@ -82,7 +82,7 @@ public class BookListController implements Initializable {
         String qu = "SELECT * FROM BOOK";
         ResultSet rs = handler.execQuery(qu);
         try {
-            while (rs.next()) {
+            while (rs != null && rs.next()) {
                 String titlex = rs.getString("title");
                 String author = rs.getString("author");
                 String id = rs.getString("id");
@@ -138,12 +138,13 @@ public class BookListController implements Initializable {
         }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/library/assistant/ui/addbook/add_book.fxml"));
+            loader.setClassLoader(getClass().getClassLoader());
             Parent parent = loader.load();
 
             BookAddController controller = (BookAddController) loader.getController();
             controller.inflateUI(selectedForEdit);
 
-            WindowManager.showWindow(parent, rootPane.getScene().getWindow(), "Edit Book", () -> handleRefresh(new ActionEvent()));
+            WindowManager.showWindow(parent, rootPane, "Edit Book", () -> handleRefresh(new ActionEvent()));
 
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);

@@ -40,18 +40,19 @@ public class LibraryAssistantUtil {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
     public static void setStageIcon(Stage stage) {
-        stage.getIcons().add(new Image(ICON_IMAGE_LOC));
+        stage.getIcons().add(new Image(LibraryAssistantUtil.class.getResource(ICON_IMAGE_LOC).toString()));
     }
 
-    public static Object loadWindow(URL loc, String title, Window parentStage, Stage reuseStage) {
+    public static Object loadWindow(URL loc, String title, Node context, Stage reuseStage) {
         Object controller = null;
         try {
             FXMLLoader loader = new FXMLLoader(loc);
+            loader.setClassLoader(LibraryAssistantUtil.class.getClassLoader());
             Parent parent = loader.load();
             controller = loader.getController();
             if(!WebAPI.isBrowser()) {
                 Stage stage = null;
-                if (parentStage != null) {
+                if (reuseStage != null) {
                     stage = reuseStage;
                 } else {
                     stage = new Stage(StageStyle.DECORATED);
@@ -62,7 +63,7 @@ public class LibraryAssistantUtil {
                 setStageIcon(stage);
             } else {
                 //AlertMaker.showMaterialDialog(parent,null,new LinkedList<>(),title,null);
-                WindowManager.showWindow(parent,parentStage,title,() -> {});
+                WindowManager.showWindow(parent,context,title,() -> {});
             }
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);

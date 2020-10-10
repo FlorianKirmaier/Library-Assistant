@@ -1,0 +1,12 @@
+{
+  "samples": [
+    {
+      "category": "Application",
+      "name": "Library-Assistent",
+      "desc": "Library Management application!",
+      "project": "library-assistant",
+      "preview": "/preview.png",
+      "classname": "library.assistant.ui.main.Main"
+    }
+  ]
+}

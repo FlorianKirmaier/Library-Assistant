@@ -38,6 +38,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import library.assistant.WindowManager;
 import library.assistant.alert.AlertMaker;
 import library.assistant.database.DataHelper;
 import library.assistant.database.DatabaseHandler;
@@ -396,37 +397,37 @@ public class MainController implements Initializable, BookReturnCallback {
 
     @FXML
     private void handleMenuAddBook(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addbook/add_book.fxml"), "Add New Book", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addbook/add_book.fxml"), "Add New Book", rootPane, null);
     }
 
     @FXML
     private void handleMenuAddMember(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addmember/member_add.fxml"), "Add New Member", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/addmember/member_add.fxml"), "Add New Member", rootPane, null);
     }
 
     @FXML
     private void handleMenuViewBook(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listbook/book_list.fxml"), "Book List", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listbook/book_list.fxml"), "Book List", rootPane, null);
     }
 
     @FXML
     private void handleAboutMenu(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/about/about.fxml"), "About Me", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/about/about.fxml"), "About Me", rootPane, null);
     }
 
     @FXML
     private void handleMenuSettings(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/settings/settings.fxml"), "Settings", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/settings/settings.fxml"), "Settings", rootPane, null);
     }
 
     @FXML
     private void handleMenuViewMemberList(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listmember/member_list.fxml"), "Member List", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/listmember/member_list.fxml"), "Member List", rootPane, null);
     }
 
     @FXML
     private void handleIssuedList(ActionEvent event) {
-        Object controller = LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/issuedlist/issued_list.fxml"), "Issued Book List", rootPane.getScene().getWindow(), null);
+        Object controller = LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/issuedlist/issued_list.fxml"), "Issued Book List", rootPane, null);
         if (controller != null) {
             IssuedListController cont = (IssuedListController) controller;
             cont.setBookReturnCallback(this);
@@ -442,6 +443,7 @@ public class MainController implements Initializable, BookReturnCallback {
     private void initDrawer() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/library/assistant/ui/main/toolbar/toolbar.fxml"));
+            loader.setClassLoader(getClass().getClassLoader());
             VBox toolbar = loader.load();
             drawer.setSidePane(toolbar);
             ToolbarController controller = loader.getController();
@@ -565,7 +567,7 @@ public class MainController implements Initializable, BookReturnCallback {
 
     @FXML
     private void handleMenuOverdueNotification(ActionEvent event) {
-        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/notifoverdue/overdue_notification.fxml"), "Notify Users", rootPane.getScene().getWindow(), null);
+        LibraryAssistantUtil.loadWindow(getClass().getResource("/library/assistant/ui/notifoverdue/overdue_notification.fxml"), "Notify Users", rootPane, null);
     }
 
 }

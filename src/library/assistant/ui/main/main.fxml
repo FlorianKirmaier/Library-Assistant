@@ -132,9 +132,9 @@
                         </Tab>
                         <Tab fx:id="renewTab" closable="false" styleClass="tab-main" text="Renew / Submission">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              <AnchorPane prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <BorderPane layoutX="251.0" layoutY="71.0" prefHeight="412.0" prefWidth="557.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <BorderPane  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <top>
                                           <JFXTextField fx:id="bookID" labelFloat="true" maxWidth="274.0" minWidth="274.0" onAction="#loadBookInfo2" prefHeight="32.0" prefWidth="274.0" promptText="Enter BOOK ID" BorderPane.alignment="CENTER">
                                              <BorderPane.margin>
@@ -143,7 +143,7 @@
                                           </JFXTextField>
                                        </top>
                                        <bottom>
-                                          <HBox alignment="CENTER" prefHeight="69.0" prefWidth="557.0" BorderPane.alignment="CENTER">
+                                          <HBox alignment="CENTER" prefHeight="69.0" BorderPane.alignment="CENTER">
                                              <children>
                                                 <JFXButton fx:id="renewButton" disable="true" onAction="#loadRenewOp" prefWidth="150.0" text="Renew">
                                                    <HBox.margin>
@@ -161,7 +161,7 @@
                                        <center>
                                           <HBox fx:id="submissionDataContainer" alignment="CENTER" opacity="0.0" prefHeight="10000.0" prefWidth="10000.0" BorderPane.alignment="CENTER">
                                              <children>
-                                                <VBox alignment="TOP_CENTER" prefHeight="336.0" prefWidth="234.0" spacing="20.0" styleClass="submission-container">
+                                                <VBox alignment="TOP_CENTER" spacing="20.0" styleClass="submission-container">
                                                    <children>
                                                       <FontAwesomeIconView glyphName="USER" size="60">
                                                          <VBox.margin>

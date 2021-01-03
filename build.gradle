@@ -15,6 +15,7 @@ buildscript {
     dependencies {
         classpath 'com.sandec.jpro:jpro-plugin-gradle:2020.1.0-RC1'
         classpath 'org.openjfx:javafx-plugin:0.0.9'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
     }
 }
 
@@ -26,6 +27,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'maven-publish'
 apply plugin: 'org.openjfx.javafxplugin'
+apply plugin: 'com.jfrog.bintray'
 
 compileJava {
     sourceCompatibility = 11
@@ -128,14 +130,31 @@ jpro {
 
 }
 
+group = "com.javafxensemble.libraryassistant"
+version = "0.1"
+
 publishing {
     publications {
-        maven(MavenPublication) {
-            groupId = "com.javafxensemble.libraryassistant"
-            artifactId = "libraryassistant"
-            version = "0.1"
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId "libraryassistant"
+            version project.version
 
             from components.java
         }
+    }
+}
+bintray {
+    if(project.hasProperty("BINTRAY_USER")) {
+        user = BINTRAY_USER
+        key  = BINTRAY_KEY
+    }
+    publications = ['mavenJava']
+    publish = true
+    override = true
+    pkg {
+        repo = 'repo'
+        name = "libraryassistant"
+        userOrg = 'sandec'
     }
 }
